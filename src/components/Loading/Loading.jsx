@@ -1,0 +1,10 @@
+import React from "react";
+import "./Loading.css";
+
+export default function Loading() {
+  return (
+    <div>
+      <span class="loader text-5xl"></span>
+    </div>
+  );
+}
