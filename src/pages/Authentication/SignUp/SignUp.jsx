@@ -50,7 +50,7 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="min-h-screen bg-base-100 flex items-center justify-center py-30 px-4">
+    <div className="min-h-screen bg-base-100 flex items-center justify-center py-20 px-4">
       <div className="container mx-auto px-4">
         <div className="bg-base-100 rounded-2xl border border-base-content/10 overflow-hidden ">
           <div className="grid lg:grid-cols-2 min-h-[700px]">

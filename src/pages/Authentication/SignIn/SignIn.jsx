@@ -30,7 +30,7 @@ export default function SignIn() {
       login(user, accessToken);
       console.log(user, accessToken);
       toast.success("Login successful! Welcome to SkillersTop!");
-      navigate("/");
+      navigate("/company");
     } catch (error) {
       console.error(error.response?.data || error.message);
       toast.error("Login failed! Please check your credentials.");

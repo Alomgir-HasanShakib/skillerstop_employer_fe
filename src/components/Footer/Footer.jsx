@@ -66,9 +66,9 @@ export default function Footer() {
             {/* Brand Section */}
             <div className="space-y-6">
               <div className="flex items-center gap-2">
-                <Link
-                  to="/"
-                  className="flex items-center group transition-transform hover:scale-105 duration-300"
+                <div
+                 
+                  className="flex items-center group transition-transform  duration-300"
                 >
                   <div>
                     <img
@@ -82,7 +82,7 @@ export default function Footer() {
                       alt="Logo"
                     />
                   </div>
-                </Link>
+                </div>
               </div>
               <p className="text-sm leading-relaxed opacity-80">
                 Your trusted partner in talent acquisition. Connecting companies with exceptional candidates to drive business success.

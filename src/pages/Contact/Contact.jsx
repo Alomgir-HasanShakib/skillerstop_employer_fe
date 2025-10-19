@@ -96,11 +96,11 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-base-100">
-      <div className="container mx-auto px-4 py-30">
+    <div className="min-h-screen bg-base-100 py-10">
+      <div className="container mx-auto px-4 ">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary text-primary-content px-6 py-3 rounded-full mb-6 shadow-lg">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-6 py-3 rounded-full mb-6 ">
             <MessageCircle className="w-5 h-5" />
             <span className="font-bold text-sm">Employer Support</span>
           </div>

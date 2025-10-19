@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Award, Users, Target, Zap, BookOpen, TrendingUp, Building2, Briefcase, Globe } from "lucide-react";
+import {
+  Award,
+  Users,
+  Target,
+  Zap,
+  BookOpen,
+  TrendingUp,
+  Building2,
+  Briefcase,
+  Globe,
+  Info,
+} from "lucide-react";
 
 export default function About() {
   const [activeTab, setActiveTab] = useState("mission");
@@ -39,15 +50,20 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen  py-30 px-4">
+    <div className="min-h-screen  py-10 px-4">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 bg-primary/10 text-primary px-6 py-3 rounded-full mb-6">
+            <Info className="w-6 h-6" />
+            <span className="font-bold">About Us</span>
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
             About SkillersTop
           </h1>
           <p className="text-xl text-base-content opacity-70 max-w-2xl mx-auto">
-            Your trusted partner in talent acquisition. Find, hire, and grow with the best recruitment platform.
+            Your trusted partner in talent acquisition. Find, hire, and grow
+            with the best recruitment platform.
           </p>
         </div>
 
@@ -187,8 +203,10 @@ export default function About() {
           <div className="card-body p-12 text-center ">
             <h2 className="text-4xl font-bold mb-4">Our Vision</h2>
             <p className="text-lg max-w-3xl mx-auto leading-relaxed opacity-90">
-              To revolutionize the recruitment industry by creating the world's most efficient talent acquisition platform, 
-              where companies of all sizes can find exceptional candidates quickly and build teams that drive innovation and success.
+              To revolutionize the recruitment industry by creating the world's
+              most efficient talent acquisition platform, where companies of all
+              sizes can find exceptional candidates quickly and build teams that
+              drive innovation and success.
             </p>
             <button className="btn btn-primary btn-lg mt-8  transition-transform">
               Start Hiring Today

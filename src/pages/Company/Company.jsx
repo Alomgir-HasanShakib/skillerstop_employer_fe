@@ -149,7 +149,7 @@ export default function Company() {
 
         {/* Stats and Actions */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mb-8">
-          <div className="stats shadow-lg bg-base-100 border border-base-300">
+          <div className="stats  bg-base-100 border border-base-300">
             <div className="stat">
               <div className="stat-figure text-primary">
                 <Building2 className="w-8 h-8" />
