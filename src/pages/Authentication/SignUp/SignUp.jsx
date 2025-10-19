@@ -40,11 +40,11 @@ export default function SignUp() {
       localStorage.setItem("userEmail", user.email);
       localStorage.setItem("userName", user.name);
       login(user, accessToken);
-      toast.success("Account created successfully!");
+      toast.success("Company account created successfully!");
       navigate("/verify-email");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      toast.error("Failed to create account!");
+      toast.error("Failed to create company account!");
     } finally {
       setLoading(false);
     }
@@ -74,15 +74,14 @@ export default function SignUp() {
                   <FaUserCircle className="text-primary text-2xl" />
                 </div>
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-base-content mb-4 lg:mb-6 leading-tight">
-                  Start Your
+                  Start Hiring
                   <br />
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-                    Career Journey
+                    Top Talent
                   </span>
                 </h1>
                 <p className="text-lg lg:text-xl text-base-content/80 mb-8 lg:mb-12 leading-relaxed">
-                  Join thousands of professionals who found their dream jobs
-                  through SkillersTop. Create your account today!
+                  Join thousands of companies who found their perfect candidates through SkillersTop. Create your employer account today!
                 </p>
 
                 {/* Feature List */}
@@ -92,7 +91,7 @@ export default function SignUp() {
                       <Check className="w-4 h-4 lg:w-5 lg:h-5 text-primary" />
                     </div>
                     <span className="text-base-content text-base lg:text-lg">
-                      Access to 5000+ job listings
+                      Post unlimited job listings
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -100,7 +99,7 @@ export default function SignUp() {
                       <Check className="w-4 h-4 lg:w-5 lg:h-5 text-primary" />
                     </div>
                     <span className="text-base-content text-base lg:text-lg">
-                      Personalized job recommendations
+                      Access to 50K+ skilled candidates
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -108,7 +107,7 @@ export default function SignUp() {
                       <Check className="w-4 h-4 lg:w-5 lg:h-5 text-primary" />
                     </div>
                     <span className="text-base-content text-base lg:text-lg">
-                      Resume builder & career tools
+                      Advanced candidate filtering
                     </span>
                   </div>
                 </div>
@@ -119,10 +118,10 @@ export default function SignUp() {
                 <div className="grid grid-cols-3 gap-3 lg:gap-4">
                   <div className="bg-base-100/50 backdrop-blur-md text-center rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-base-300">
                     <div className="text-xl lg:text-2xl xl:text-3xl font-bold text-base-content mb-1">
-                      98%
+                      50K+
                     </div>
                     <div className="text-xs lg:text-sm text-base-content/70">
-                      Success Rate
+                      Skilled Candidates
                     </div>
                   </div>
                   <div className="bg-base-100/50 backdrop-blur-md text-center rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-base-300">
@@ -135,10 +134,10 @@ export default function SignUp() {
                   </div>
                   <div className="bg-base-100/50 backdrop-blur-md text-center rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-base-300">
                     <div className="text-xl lg:text-2xl xl:text-3xl font-bold text-base-content mb-1">
-                      24/7
+                      95%
                     </div>
                     <div className="text-xs lg:text-sm text-base-content/70">
-                      Support
+                      Hiring Success
                     </div>
                   </div>
                 </div>
@@ -150,10 +149,10 @@ export default function SignUp() {
                 {/* Header */}
                 <div className="text-center mb-6 lg:mb-8">
                   <h2 className="text-3xl lg:text-4xl font-bold text-base-content mb-2 lg:mb-3">
-                    Create Account
+                    Create Company Account
                   </h2>
                   <p className="text-base-content/70 text-sm lg:text-base">
-                    Fill in your details to get started
+                    Register your company to start hiring talent
                   </p>
                 </div>
                 {/* Form */}
@@ -164,13 +163,13 @@ export default function SignUp() {
                   {/* Username Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Username *
+                      Company Username *
                     </label>
                     <div className="relative">
                       <input
                         type="text"
                         name="username"
-                        placeholder="rohid"
+                        placeholder="techcorp2024"
                         className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.username}
                         onChange={handleChange}
@@ -182,13 +181,13 @@ export default function SignUp() {
                   {/* Name Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Full Name *
+                      Company Name *
                     </label>
                     <div className="relative">
                       <input
                         type="text"
                         name="name"
-                        placeholder="John Doe"
+                        placeholder="TechCorp Solutions Ltd."
                         className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.name}
                         onChange={handleChange}
@@ -201,13 +200,13 @@ export default function SignUp() {
                   {/* Email Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Email Address *
+                      Work Email Address *
                     </label>
                     <div className="relative">
                       <input
                         type="email"
                         name="email"
-                        placeholder="you@example.com"
+                        placeholder="hr@company.com"
                         className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.email}
                         onChange={handleChange}
@@ -219,7 +218,7 @@ export default function SignUp() {
                   {/* Phone Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Phone Number *
+                      Company Phone *
                     </label>
                     <div className="relative">
                       <input
@@ -295,11 +294,11 @@ export default function SignUp() {
                     {loading ? (
                       <>
                         <span className="loading loading-spinner"></span>
-                        Creating Account...
+                        Creating Company Account...
                       </>
                     ) : (
                       <>
-                        Create Account
+                        Create Company Account
                         <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 ml-2" />
                       </>
                     )}
@@ -310,7 +309,7 @@ export default function SignUp() {
                       to="/signin"
                       className="text-sm text-base-content/70 hover:text-base-content transition-colors"
                     >
-                      Already have an account?{" "}
+                      Already have a company account?{" "}
                       <span className="font-semibold text-primary hover:text-primary-focus">
                         Sign In
                       </span>

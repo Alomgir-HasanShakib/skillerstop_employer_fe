@@ -1,7 +1,7 @@
 import axiosInstance from "../axiosInstance/axiosInstance";
 
 export const loginUser = async (formData) => {
-  const response = await axiosInstance.post("/employer/auth/login,", formData);
+  const response = await axiosInstance.post("/employer/auth/login", formData);
   const data = response.data;
 
   const user = {
