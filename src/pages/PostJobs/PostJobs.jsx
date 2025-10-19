@@ -1,194 +1,213 @@
 import React, { useState } from 'react';
-import { BookOpen } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
+import JobModal from '../../components/JobModal/JobModal';
+import JobCard from '../../components/JobCard/JobCard';
 
-export default function PostJobs() {
+export default function Job() {
+  const [jobs, setJobs] = useState([
+    {
+      id: 1,
+      jobTitle: "Frontend Developer",
+      jobHighlights: [
+        "Flexible work schedule",
+        "Health insurance",
+        "5 working days a week"
+      ],
+      jobRequirement: "Strong proficiency in React.js and TypeScript.",
+      jobResponsibilities: "Develop and maintain front-end features using React.",
+      jobLocation: "Dhaka, Bangladesh",
+      jobMinSalary: 40000,
+      jobMaxSalary: 70000,
+      jobShiftTime: "Day (9 AM - 6 PM)",
+      jobDescription: "We are looking for a passionate Frontend Developer who loves building user-friendly web applications.",
+      jobType: "Full-Time",
+      experience: 2,
+      education: "Bachelor's degree in Computer Science or equivalent",
+      skills: ["React", "TypeScript", "HTML", "CSS", "REST APIs"],
+      jobStartDate: "2025-10-20",
+      applicationDeadline: "2025-11-10"
+    },
+    {
+      id: 2,
+      jobTitle: "Backend Developer",
+      jobHighlights: [
+        "Remote work options",
+        "Performance bonuses",
+        "Professional development"
+      ],
+      jobRequirement: "Strong proficiency in Node.js, Python, and database design.",
+      jobResponsibilities: "Design and develop scalable backend systems and APIs.",
+      jobLocation: "Remote",
+      jobMinSalary: 50000,
+      jobMaxSalary: 90000,
+      jobShiftTime: "Flexible (Core hours 10 AM - 4 PM)",
+      jobDescription: "We are seeking an experienced Backend Developer to build robust server-side applications and APIs.",
+      jobType: "Full-Time",
+      experience: 3,
+      education: "Bachelor's degree in Computer Science or related field",
+      skills: ["Node.js", "Python", "MongoDB", "PostgreSQL", "Docker"],
+      jobStartDate: "2025-11-01",
+      applicationDeadline: "2025-11-20"
+    },
+    {
+      id: 3,
+      jobTitle: "UI/UX Designer",
+      jobHighlights: [
+        "Creative work environment",
+        "Latest design tools provided",
+        "Career growth opportunities"
+      ],
+      jobRequirement: "Proven experience in UI/UX design with strong portfolio.",
+      jobResponsibilities: "Create user-centered designs and improve user experience.",
+      jobLocation: "Chattogram, Bangladesh",
+      jobMinSalary: 35000,
+      jobMaxSalary: 60000,
+      jobShiftTime: "Day (10 AM - 7 PM)",
+      jobDescription: "Looking for a creative UI/UX Designer to transform complex problems into intuitive designs.",
+      jobType: "Full-Time",
+      experience: 2,
+      education: "Bachelor's degree in Design or equivalent experience",
+      skills: ["Figma", "Adobe XD", "User Research", "Wireframing", "Prototyping"],
+      jobStartDate: "2025-10-25",
+      applicationDeadline: "2025-11-15"
+    }
+  ]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({
-    title: '',
-    college: '',
-    location: '',
-    salary: '',
-    type: 'Full-time',
-    description: '',
-    requirements: ''
+    jobTitle: '',
+    jobHighlights: ['', '', ''],
+    jobRequirement: '',
+    jobResponsibilities: '',
+    jobLocation: '',
+    jobMinSalary: '',
+    jobMaxSalary: '',
+    jobShiftTime: '',
+    jobDescription: '',
+    jobType: 'Full-Time',
+    experience: '',
+    education: '',
+    skills: [],
+    jobStartDate: '',
+    applicationDeadline: ''
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editingId) {
+      setJobs(jobs.map(j => j.id === editingId ? { ...j, ...formData } : j));
+      setEditingId(null);
+    } else {
+      const newJob = {
+        id: Date.now(),
+        ...formData
+      };
+      setJobs([...jobs, newJob]);
+    }
+    resetForm();
+    setShowModal(false);
   };
 
-  const handleSubmit = () => {
-    if (!formData.title || !formData.college || !formData.location || !formData.salary || !formData.description) {
-      alert('Please fill all required fields!');
-      return;
-    }
+  const handleEdit = (job) => {
+    setFormData(job);
+    setEditingId(job.id);
+    setShowModal(true);
+  };
 
-    alert('Job posted successfully!');
-    console.log('Posted Job:', formData);
-    
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this job?')) {
+      setJobs(jobs.filter(j => j.id !== id));
+    }
+  };
+
+  const resetForm = () => {
     setFormData({
-      title: '',
-      college: '',
-      location: '',
-      salary: '',
-      type: 'Full-time',
-      description: '',
-      requirements: ''
+      jobTitle: '',
+      jobHighlights: ['', '', ''],
+      jobRequirement: '',
+      jobResponsibilities: '',
+      jobLocation: '',
+      jobMinSalary: '',
+      jobMaxSalary: '',
+      jobShiftTime: '',
+      jobDescription: '',
+      jobType: 'Full-Time',
+      experience: '',
+      education: '',
+      skills: [],
+      jobStartDate: '',
+      applicationDeadline: ''
     });
   };
 
+  const openCreateModal = () => {
+    setEditingId(null);
+    resetForm();
+    setShowModal(true);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-200 to-base-300 p-6">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-primary mb-2 flex items-center gap-3">
-            <BookOpen size={40} />
-            Post a New Job
+    <div className="min-h-screen bg-base-100 p-8">
+      <div className="container px-4 mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-3 bg-primary/10 text-primary px-6 py-3 rounded-full mb-6">
+            <Briefcase className="w-6 h-6" />
+            <span className="font-bold">Job Management</span>
+          </div>
+          <h1 className="text-5xl font-bold text-base-content mb-4">
+            Manage Your <span className="text-primary">Job Posts</span>
           </h1>
-          <p className="text-lg text-base-content opacity-70">
-            Create a new job opportunity for your college
+          <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
+            Create and manage job postings to attract top talent and grow your team
           </p>
         </div>
 
-        {/* Form Card */}
-        <div className="card bg-base-100 shadow-2xl">
-          <div className="card-body">
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Title */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-semibold">Job Title *</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    placeholder="e.g., Computer Science Instructor"
-                    className="input input-bordered input-primary w-full"
-                  />
-                </div>
-
-                {/* College */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-semibold">College Name *</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="college"
-                    value={formData.college}
-                    onChange={handleInputChange}
-                    placeholder="e.g., Harvard College"
-                    className="input input-bordered input-primary w-full"
-                  />
-                </div>
-
-                {/* Location */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-semibold">Location *</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    placeholder="e.g., New York, NY"
-                    className="input input-bordered input-primary w-full"
-                  />
-                </div>
-
-                {/* Salary */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-semibold">Salary Range *</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="salary"
-                    value={formData.salary}
-                    onChange={handleInputChange}
-                    placeholder="e.g., $50,000 - $70,000"
-                    className="input input-bordered input-primary w-full"
-                  />
-                </div>
-
-                {/* Job Type */}
-                <div className="form-control md:col-span-2">
-                  <label className="label">
-                    <span className="label-text font-semibold">Job Type *</span>
-                  </label>
-                  <select
-                    name="type"
-                    value={formData.type}
-                    onChange={handleInputChange}
-                    className="select select-bordered select-primary w-full"
-                  >
-                    <option>Full-time</option>
-                    <option>Part-time</option>
-                    <option>Contract</option>
-                  </select>
-                </div>
+        {/* Stats and Actions */}
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mb-8">
+          <div className="stats  bg-base-100 border border-base-300">
+            <div className="stat">
+              <div className="stat-figure text-primary">
+                <Briefcase className="w-8 h-8" />
               </div>
-
-              {/* Description */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-semibold">Job Description *</span>
-                </label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  placeholder="Provide detailed description of the job role and responsibilities..."
-                  className="textarea textarea-bordered textarea-primary w-full h-24"
-                />
-              </div>
-
-              {/* Requirements */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-semibold">Requirements (comma separated)</span>
-                </label>
-                <textarea
-                  name="requirements"
-                  value={formData.requirements}
-                  onChange={handleInputChange}
-                  placeholder="e.g., B.S. in Computer Science, 3+ years experience, Excellent communication skills"
-                  className="textarea textarea-bordered textarea-primary w-full h-20"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex gap-3 justify-end pt-6">
-                <button
-                  onClick={() => setFormData({
-                    title: '',
-                    college: '',
-                    location: '',
-                    salary: '',
-                    type: 'Full-time',
-                    description: '',
-                    requirements: ''
-                  })}
-                  className="btn btn-ghost"
-                >
-                  Clear
-                </button>
-                <button onClick={handleSubmit} className="btn btn-primary">
-                  Post Job
-                </button>
-              </div>
+              <div className="stat-title">Active Jobs</div>
+              <div className="stat-value text-primary">{jobs.length}</div>
+              <div className="stat-desc">Open positions</div>
             </div>
           </div>
+
+          <button
+            onClick={openCreateModal}
+            className="btn btn-primary btn-lg gap-3 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            Post New Job
+          </button>
+        </div>
+
+        {/* Jobs Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {jobs.map(job => (
+            <JobCard
+              key={job.id}
+              job={job}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ))}
         </div>
       </div>
+
+      {/* Modal */}
+      <JobModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        editingId={editingId}
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={handleSubmit}
+        setEditingId={setEditingId}
+      />
     </div>
   );
 }
