@@ -18,8 +18,8 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "sonner";
 
 const navLinks = [
-  { path: "/", label: "Home", icon: Home },
   { path: "/postJobs", label: "Post a Jobs", icon: Briefcase },
+  { path: "/company", label: "Company", icon: Briefcase },
   { path: "/about", label: "About", icon: Info },
   { path: "/contact", label: "Contact", icon: Mail },
 ];
@@ -67,7 +67,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 ">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center  group">
+        
             <div>
               <img
                 src={
@@ -79,7 +79,7 @@ export default function Navbar() {
                 alt="Logo"
               />
             </div>
-          </Link>
+         
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-3">

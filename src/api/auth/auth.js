@@ -14,7 +14,7 @@ export const loginUser = async (formData) => {
     username: data.username,
   };
 
-  return { data: { accessToken: data.accessToken, user } }; // 👈 আগের destructuring অনুযায়ী
+  return { data: { accessToken: data.accessToken, user } };
 };
 
 export const registerUser = async (formData) => {
