@@ -37,7 +37,7 @@ export default function SignIn() {
     }
   };
   return (
-    <div className="min-h-screen bg-base-100 flex items-center justify-center py-20">
+    <div className=" bg-base-100 flex items-center justify-center py-20">
       <div className="container px-4 mx-auto">
         <div className="bg-base-100 rounded-xl border border-base-300 overflow-hidden">
           <div className="grid lg:grid-cols-2 min-h-[600px] lg:min-h-[700px]">
@@ -137,7 +137,7 @@ export default function SignIn() {
                       <input
                         type="email"
                         placeholder="company@example.com"
-                        className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
+                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -155,7 +155,7 @@ export default function SignIn() {
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
-                        className="input input-bordered w-full pl-10 lg:pl-12 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
+                        className="input input-bordered w-full pl-10 lg:pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />

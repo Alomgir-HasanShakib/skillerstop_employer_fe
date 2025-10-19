@@ -170,7 +170,7 @@ export default function SignUp() {
                         type="text"
                         name="username"
                         placeholder="techcorp2024"
-                        className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.username}
                         onChange={handleChange}
                         required
@@ -188,7 +188,7 @@ export default function SignUp() {
                         type="text"
                         name="name"
                         placeholder="TechCorp Solutions Ltd."
-                        className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -207,7 +207,7 @@ export default function SignUp() {
                         type="email"
                         name="email"
                         placeholder="hr@company.com"
-                        className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -225,7 +225,7 @@ export default function SignUp() {
                         type="tel"
                         name="phone"
                         placeholder="+91 9876543210"
-                        className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.phone}
                         onChange={handleChange}
                         required
@@ -242,7 +242,7 @@ export default function SignUp() {
                         type={showPassword ? "text" : "password"}
                         name="password"
                         placeholder="Create a strong password (min 8 characters)"
-                        className="input input-bordered w-full pl-10 lg:pl-12 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-10 lg:pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.password}
                         onChange={handleChange}
                         required
