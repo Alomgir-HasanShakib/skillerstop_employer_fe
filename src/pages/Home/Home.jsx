@@ -10,13 +10,7 @@ import CallToAction from "../../components/CallToAction/CallToAction";
 export default function Home() {
   return (
     <div>
-      <Banner></Banner>
-      <Popular></Popular>
-      <FeaturedJobs></FeaturedJobs>
-      <WhyChoose></WhyChoose>
-      <HowItWorks></HowItWorks>
-      <Testimonials></Testimonials>
-      <CallToAction></CallToAction>
+     
     </div>
   );
 }

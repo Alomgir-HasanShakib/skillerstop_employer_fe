@@ -24,20 +24,22 @@ export default function SignIn() {
     try {
       const response = await loginUser(formData);
       const { accessToken, user } = response.data;
+      console.log(user, accessToken);
       //Save token
       localStorage.setItem("accessToken", accessToken);
-      // Update React Query
+      localStorage.setItem("user", JSON.stringify(user))
       login(user, accessToken);
-      console.log(user, accessToken);
+
+      
       toast.success("Login successful! Welcome to SkillersTop!");
-      navigate("/");
+      navigate("/company");
     } catch (error) {
       console.error(error.response?.data || error.message);
       toast.error("Login failed! Please check your credentials.");
     }
   };
   return (
-    <div className="min-h-screen bg-base-100 flex items-center justify-center py-30">
+    <div className=" bg-base-100 flex items-center justify-center py-20">
       <div className="container px-4 mx-auto">
         <div className="bg-base-100 rounded-xl border border-base-300 overflow-hidden">
           <div className="grid lg:grid-cols-2 min-h-[600px] lg:min-h-[700px]">
@@ -66,8 +68,7 @@ export default function SignIn() {
                   <span className="text-primary">SkillersTop</span>
                 </h1>
                 <p className="text-base lg:text-lg xl:text-xl text-base-content/80 mb-8 lg:mb-12 leading-relaxed">
-                  Discover your dream career with thousands of job opportunities
-                  from top companies worldwide.
+                  Build your company profile, post job opportunities, and find the best talent from our skilled community.
                 </p>
                 {/* Stats Cards */}
                 <div className="grid grid-cols-3 gap-3 lg:gap-4">
@@ -89,10 +90,10 @@ export default function SignIn() {
                   </div>
                   <div className="bg-base-200 rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-base-300 text-center">
                     <div className="text-xl lg:text-2xl xl:text-3xl font-bold text-base-content mb-1">
-                      10K+
+                      50K+
                     </div>
                     <div className="text-xs lg:text-sm text-base-content/70">
-                      Happy Users
+                      Skilled Candidates
                     </div>
                   </div>
                 </div>
@@ -103,11 +104,10 @@ export default function SignIn() {
                   <FastForward className="w-6 h-6 lg:w-8 lg:h-8 text-warning flex-shrink-0 mt-1" />
                   <div>
                     <p className="text-base-content/80 italic mb-2 text-sm lg:text-base">
-                      "SkillersTop helped me land my dream job in just 2 weeks.
-                      The platform is incredibly user-friendly!"
+                      "SkillersTop helped us hire 5 excellent developers in just 2 weeks. The platform is incredibly efficient for employers!"
                     </p>
                     <p className="text-base-content/60 text-xs lg:text-sm font-semibold">
-                      - Sarah Johnson, Software Engineer
+                      - TechCorp Solutions, HR Manager
                     </p>
                   </div>
                 </div>
@@ -119,10 +119,10 @@ export default function SignIn() {
                 {/* Header */}
                 <div className="text-center mb-8 lg:mb-10">
                   <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-base-content mb-2 lg:mb-3">
-                    Login to Your Account
+                    Employer Login
                   </h2>
                   <p className="text-base-content/70 text-sm lg:text-base">
-                    Enter your credentials to access your dashboard
+                    Access your employer dashboard to manage companies and jobs
                   </p>
                 </div>
                 {/* Form */}
@@ -130,7 +130,7 @@ export default function SignIn() {
                   {/* Email Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Email Address
+                      Work Email Address
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 lg:pl-4 flex items-center pointer-events-none">
@@ -138,8 +138,8 @@ export default function SignIn() {
                       </div>
                       <input
                         type="email"
-                        placeholder="you@example.com"
-                        className="input input-bordered w-full pl-10 lg:pl-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
+                        placeholder="company@example.com"
+                        className="input input-bordered w-full pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -157,7 +157,7 @@ export default function SignIn() {
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
-                        className="input input-bordered w-full pl-10 lg:pl-12 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
+                        className="input input-bordered w-full pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -197,7 +197,7 @@ export default function SignIn() {
                     onClick={handleSubmit}
                     className="btn btn-primary w-full h-11 lg:h-12 text-sm lg:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    Sign In
+                    Sign In as Employer
                     <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 ml-2" />
                   </button>
                   {/* Sign Up Link */}
@@ -206,9 +206,9 @@ export default function SignIn() {
                       to="/signup"
                       className="text-sm text-base-content/70 hover:text-base-content transition-colors"
                     >
-                      Don't have an account?{" "}
+                      Don't have an employer account?{" "}
                       <span className="font-semibold text-primary hover:text-primary-focus">
-                        Create Account
+                        Create  Account
                       </span>
                     </Link>
                   </div>

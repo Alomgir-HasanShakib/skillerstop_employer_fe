@@ -18,8 +18,8 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "sonner";
 
 const navLinks = [
-  { path: "/", label: "Home", icon: Home },
   { path: "/postJobs", label: "Post a Jobs", icon: Briefcase },
+  { path: "/company", label: "Company", icon: Briefcase },
   { path: "/about", label: "About", icon: Info },
   { path: "/contact", label: "Contact", icon: Mail },
 ];
@@ -30,6 +30,7 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,28 +59,27 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`transition-all duration-300 ${
         scrolled
-          ? "bg-base-100/90 backdrop-blur-md  border-b border-base-300"
+          ? "bg-base-100/90 backdrop-blur-md border-b border-base-300"
           : "bg-base-100 border-b border-base-300"
       }`}
     >
       <div className="container mx-auto px-4 ">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-17">
           {/* Logo */}
-          <Link to="/" className="flex items-center  group">
-            <div>
-              <img
-                src={
-                  document.documentElement.getAttribute("data-theme") === "dark"
-                    ? NavDarkLogo
-                    : NavLightLogo
-                }
-                className="w-30"
-                alt="Logo"
-              />
-            </div>
-          </Link>
+
+          <div>
+            <img
+              src={
+                document.documentElement.getAttribute("data-theme") === "dark"
+                  ? NavDarkLogo
+                  : NavLightLogo
+              }
+              className="w-23"
+              alt="Logo"
+            />
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-3">
@@ -93,7 +93,7 @@ export default function Navbar() {
                     `flex items-center space-x-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 ${
                       isActive
                         ? " border-b-2  border-primary text-primary   "
-                        : "text-base-content hover:bg-base-200/70 hover:shadow-md  "
+                        : "text-base-content hover:bg-base-300   "
                     }`
                   }
                 >
