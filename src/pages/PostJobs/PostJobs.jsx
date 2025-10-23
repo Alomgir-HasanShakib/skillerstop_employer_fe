@@ -1,154 +1,198 @@
-import React, { useState } from 'react';
-import { Briefcase } from 'lucide-react';
-import JobModal from '../../components/JobModal/JobModal';
-import JobCard from '../../components/JobCard/JobCard';
+// src/pages/Employer/Job.jsx
+import React, { useState, useEffect } from "react";
+import { Briefcase } from "lucide-react";
+import JobModal from "../../components/JobModal/JobModal";
+import JobCard from "../../components/JobCard/JobCard";
+import { getAllJobs, createJob, updateJob, deleteJob } from "../../api/job/job";
+import { getAllCompanies } from "../../api/company/company";
+import { toast } from "sonner";
+import useAuth from "../../hooks/useAuth";
 
 export default function Job() {
-  const [jobs, setJobs] = useState([
-    {
-      id: 1,
-      jobTitle: "Frontend Developer",
-      jobHighlights: [
-        "Flexible work schedule",
-        "Health insurance",
-        "5 working days a week"
-      ],
-      jobRequirement: "Strong proficiency in React.js and TypeScript.",
-      jobResponsibilities: "Develop and maintain front-end features using React.",
-      jobLocation: "Dhaka, Bangladesh",
-      jobMinSalary: 40000,
-      jobMaxSalary: 70000,
-      jobShiftTime: "Day (9 AM - 6 PM)",
-      jobDescription: "We are looking for a passionate Frontend Developer who loves building user-friendly web applications.",
-      jobType: "Full-Time",
-      experience: 2,
-      education: "Bachelor's degree in Computer Science or equivalent",
-      skills: ["React", "TypeScript", "HTML", "CSS", "REST APIs"],
-      jobStartDate: "2025-10-20",
-      applicationDeadline: "2025-11-10"
-    },
-    {
-      id: 2,
-      jobTitle: "Backend Developer",
-      jobHighlights: [
-        "Remote work options",
-        "Performance bonuses",
-        "Professional development"
-      ],
-      jobRequirement: "Strong proficiency in Node.js, Python, and database design.",
-      jobResponsibilities: "Design and develop scalable backend systems and APIs.",
-      jobLocation: "Remote",
-      jobMinSalary: 50000,
-      jobMaxSalary: 90000,
-      jobShiftTime: "Flexible (Core hours 10 AM - 4 PM)",
-      jobDescription: "We are seeking an experienced Backend Developer to build robust server-side applications and APIs.",
-      jobType: "Full-Time",
-      experience: 3,
-      education: "Bachelor's degree in Computer Science or related field",
-      skills: ["Node.js", "Python", "MongoDB", "PostgreSQL", "Docker"],
-      jobStartDate: "2025-11-01",
-      applicationDeadline: "2025-11-20"
-    },
-    {
-      id: 3,
-      jobTitle: "UI/UX Designer",
-      jobHighlights: [
-        "Creative work environment",
-        "Latest design tools provided",
-        "Career growth opportunities"
-      ],
-      jobRequirement: "Proven experience in UI/UX design with strong portfolio.",
-      jobResponsibilities: "Create user-centered designs and improve user experience.",
-      jobLocation: "Chattogram, Bangladesh",
-      jobMinSalary: 35000,
-      jobMaxSalary: 60000,
-      jobShiftTime: "Day (10 AM - 7 PM)",
-      jobDescription: "Looking for a creative UI/UX Designer to transform complex problems into intuitive designs.",
-      jobType: "Full-Time",
-      experience: 2,
-      education: "Bachelor's degree in Design or equivalent experience",
-      skills: ["Figma", "Adobe XD", "User Research", "Wireframing", "Prototyping"],
-      jobStartDate: "2025-10-25",
-      applicationDeadline: "2025-11-15"
-    }
-  ]);
-
+  const { user } = useAuth();
+  const [jobs, setJobs] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [companyId, setCompanyId] = useState(null);
+  const [loadingCompany, setLoadingCompany] = useState(true);
+
   const [formData, setFormData] = useState({
-    jobTitle: '',
-    jobHighlights: ['', '', ''],
-    jobRequirement: '',
-    jobResponsibilities: '',
-    jobLocation: '',
-    jobMinSalary: '',
-    jobMaxSalary: '',
-    jobShiftTime: '',
-    jobDescription: '',
-    jobType: 'Full-Time',
-    experience: '',
-    education: '',
+    jobTitle: "",
+    jobHighlights: ["", "", ""],
+    jobRequirement: "",
+    jobResponsibilities: "",
+    jobLocation: "",
+    jobMinSalary: "",
+    jobMaxSalary: "",
+    jobShiftTime: "",
+    jobDescription: "",
+    jobType: "Full-Time",
+    experience: "",
+    education: "",
     skills: [],
-    jobStartDate: '',
-    applicationDeadline: ''
+    jobStartDate: "",
+    applicationDeadline: "",
   });
 
-  const handleSubmit = (e) => {
+  // Fetch companyId for logged-in user
+  useEffect(() => {
+    const fetchCompany = async () => {
+      if (!user) return;
+
+      try {
+        if (user.companyId) {
+          setCompanyId(user.companyId);
+          setLoadingCompany(false);
+          return;
+        }
+
+        const companies = await getAllCompanies();
+        const myCompany = companies.find(
+          (c) =>
+            c.createdBy === user._id ||
+            c.employers?.some((emp) => emp.createdBy === user._id)
+        );
+
+        if (!myCompany) {
+          toast.error("You have no company! Please create a company first.");
+          setCompanyId(null);
+          setLoadingCompany(false);
+          return;
+        }
+
+        setCompanyId(myCompany._id);
+        setLoadingCompany(false);
+      } catch (error) {
+        console.error("Company fetch error:", error);
+        toast.error("Failed to fetch company info");
+        setLoadingCompany(false);
+      }
+    };
+
+    fetchCompany();
+  }, [user]);
+
+  // Fetch all jobs
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const data = await getAllJobs();
+        setJobs(data);
+      } catch (error) {
+        console.error("Job Fetch Error:", error.response?.data || error);
+        toast.error("Failed to load jobs");
+      }
+    };
+    fetchJobs();
+  }, []);
+
+  //  Create or Update Job
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editingId) {
-      setJobs(jobs.map(j => j.id === editingId ? { ...j, ...formData } : j));
-      setEditingId(null);
-    } else {
-      const newJob = {
-        id: Date.now(),
-        ...formData
-      };
-      setJobs([...jobs, newJob]);
+    if (!companyId) {
+      toast.error("You have no company! Please create a company first.");
+      return;
     }
-    resetForm();
-    setShowModal(false);
+    const finalData = {
+      ...formData,
+      companyId,
+      deleted: false,
+      jobMinSalary: Number(formData.jobMinSalary),
+      jobMaxSalary: Number(formData.jobMaxSalary),
+      experience: Number(formData.experience),
+    };
+
+    try {
+      if (editingId) {
+        await updateJob(editingId, finalData);
+        toast.success("Job updated successfully");
+      } else {
+        await createJob(finalData);
+        toast.success("Job created successfully");
+      }
+
+      const updated = await getAllJobs();
+      setJobs(updated);
+      resetForm();
+      setShowModal(false);
+      setEditingId(null);
+    } catch (error) {
+      console.error("Job Submit Error:", error.response?.data || error);
+      toast.error("Something went wrong");
+    }
   };
 
+  //  Edit Job
   const handleEdit = (job) => {
-    setFormData(job);
-    setEditingId(job.id);
+    setFormData({
+      jobTitle: job.jobTitle || "",
+      jobHighlights: job.jobHighlights || ["", "", ""],
+      jobRequirement: job.jobRequirement || "",
+      jobResponsibilities: job.jobResponsibilities || "",
+      jobLocation: job.jobLocation || "",
+      jobMinSalary: job.jobMinSalary?.toString() || "",
+      jobMaxSalary: job.jobMaxSalary?.toString() || "",
+      jobShiftTime: job.jobShiftTime || "",
+      jobDescription: job.jobDescription || "",
+      jobType: job.jobType || "Full-Time",
+      experience: job.experience?.toString() || "",
+      education: job.education || "",
+      skills: job.skills || [],
+      jobStartDate: job.jobStartDate || "",
+      applicationDeadline: job.applicationDeadline || "",
+    });
+    setEditingId(job._id);
     setShowModal(true);
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this job?')) {
-      setJobs(jobs.filter(j => j.id !== id));
+  // Delete Job
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this job?")) {
+      setJobs((prevJobs) => prevJobs.filter((j) => j._id !== id));
+      try {
+        await deleteJob(id);
+        toast.success("Job deleted");
+      } catch (error) {
+        console.error("Job Delete Error:", error.response?.data || error);
+        toast.error("Failed to delete job");
+        const data = await getAllJobs();
+        setJobs(data);
+      }
     }
   };
 
   const resetForm = () => {
     setFormData({
-      jobTitle: '',
-      jobHighlights: ['', '', ''],
-      jobRequirement: '',
-      jobResponsibilities: '',
-      jobLocation: '',
-      jobMinSalary: '',
-      jobMaxSalary: '',
-      jobShiftTime: '',
-      jobDescription: '',
-      jobType: 'Full-Time',
-      experience: '',
-      education: '',
+      jobTitle: "",
+      jobHighlights: ["", "", ""],
+      jobRequirement: "",
+      jobResponsibilities: "",
+      jobLocation: "",
+      jobMinSalary: "",
+      jobMaxSalary: "",
+      jobShiftTime: "",
+      jobDescription: "",
+      jobType: "Full-Time",
+      experience: "",
+      education: "",
       skills: [],
-      jobStartDate: '',
-      applicationDeadline: ''
+      jobStartDate: "",
+      applicationDeadline: "",
     });
   };
 
   const openCreateModal = () => {
-    setEditingId(null);
+    if (!companyId) {
+      toast.error("You have no company! Please create a company first.");
+      return;
+    }
     resetForm();
+    setEditingId(null);
     setShowModal(true);
   };
 
   return (
-    <div className="min-h-screen bg-base-100 p-8">
+    <div className="min-h-screen bg-base-100 py-10">
       <div className="container px-4 mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
@@ -166,7 +210,7 @@ export default function Job() {
 
         {/* Stats and Actions */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mb-8">
-          <div className="stats  bg-base-100 border border-base-300">
+          <div className="stats bg-base-100 border border-base-300">
             <div className="stat">
               <div className="stat-figure text-primary">
                 <Briefcase className="w-8 h-8" />
@@ -179,17 +223,18 @@ export default function Job() {
 
           <button
             onClick={openCreateModal}
+            disabled={loadingCompany}
             className="btn btn-primary btn-lg gap-3 shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Post New Job
+            {loadingCompany ? "Loading..." : "Post New Job"}
           </button>
         </div>
 
         {/* Jobs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {jobs.map(job => (
+          {jobs.map((job) => (
             <JobCard
-              key={job.id}
+              key={job._id}
               job={job}
               onEdit={handleEdit}
               onDelete={handleDelete}

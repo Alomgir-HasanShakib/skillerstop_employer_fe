@@ -7,7 +7,7 @@ import Loading from "../../components/Loading/Loading";
 export default function MainLayout() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false),);
     return () => clearTimeout(timer);
   }, []);
   if (loading) {
@@ -23,7 +23,6 @@ export default function MainLayout() {
          <Navbar></Navbar>
       </div>
       <Outlet></Outlet>
-      {/* <Footer></Footer> */}
       <Footer></Footer>
     </div>
   );

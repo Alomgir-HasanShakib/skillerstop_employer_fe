@@ -37,8 +37,7 @@ export default function SignUp() {
       const { accessToken, user } = response.data;
       // Save data in localStorage
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userEmail", user.email);
-      localStorage.setItem("userName", user.name);
+      localStorage.setItem("user", JSON.stringify(user));
       login(user, accessToken);
       toast.success("Company account created successfully!");
       navigate("/verify-email");
@@ -81,7 +80,8 @@ export default function SignUp() {
                   </span>
                 </h1>
                 <p className="text-lg lg:text-xl text-base-content/80 mb-8 lg:mb-12 leading-relaxed">
-                  Join thousands of companies who found their perfect candidates through SkillersTop. Create your employer account today!
+                  Join thousands of companies who found their perfect candidates
+                  through SkillersTop. Create your employer account today!
                 </p>
 
                 {/* Feature List */}
@@ -149,10 +149,10 @@ export default function SignUp() {
                 {/* Header */}
                 <div className="text-center mb-6 lg:mb-8">
                   <h2 className="text-3xl lg:text-4xl font-bold text-base-content mb-2 lg:mb-3">
-                    Create Company Account
+                    Create Employee Account
                   </h2>
                   <p className="text-base-content/70 text-sm lg:text-base">
-                    Register your company to start hiring talent
+                    Register your Employee to start hiring talent
                   </p>
                 </div>
                 {/* Form */}
@@ -163,14 +163,14 @@ export default function SignUp() {
                   {/* Username Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Company Username *
+                      Username *
                     </label>
                     <div className="relative">
                       <input
                         type="text"
                         name="username"
                         placeholder="techcorp2024"
-                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.username}
                         onChange={handleChange}
                         required
@@ -181,14 +181,14 @@ export default function SignUp() {
                   {/* Name Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Company Name *
+                      Full Name *
                     </label>
                     <div className="relative">
                       <input
                         type="text"
                         name="name"
                         placeholder="TechCorp Solutions Ltd."
-                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -200,14 +200,14 @@ export default function SignUp() {
                   {/* Email Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Work Email Address *
+                      Email Address *
                     </label>
                     <div className="relative">
                       <input
                         type="email"
                         name="email"
                         placeholder="hr@company.com"
-                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -218,14 +218,14 @@ export default function SignUp() {
                   {/* Phone Field */}
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Company Phone *
+                      Phone Number*
                     </label>
                     <div className="relative">
                       <input
                         type="tel"
                         name="phone"
                         placeholder="+91 9876543210"
-                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.phone}
                         onChange={handleChange}
                         required
@@ -242,7 +242,7 @@ export default function SignUp() {
                         type={showPassword ? "text" : "password"}
                         name="password"
                         placeholder="Create a strong password (min 8 characters)"
-                        className="input input-bordered w-full pl-10 lg:pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="input input-bordered w-full pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary focus:ring-2 focus:ring-primary/20"
                         value={formData.password}
                         onChange={handleChange}
                         required
@@ -294,11 +294,11 @@ export default function SignUp() {
                     {loading ? (
                       <>
                         <span className="loading loading-spinner"></span>
-                        Creating Company Account...
+                        Creating Account...
                       </>
                     ) : (
                       <>
-                        Create Company Account
+                        Create Account
                         <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 ml-2" />
                       </>
                     )}
@@ -309,7 +309,7 @@ export default function SignUp() {
                       to="/signin"
                       className="text-sm text-base-content/70 hover:text-base-content transition-colors"
                     >
-                      Already have a company account?{" "}
+                      Already have an account?{" "}
                       <span className="font-semibold text-primary hover:text-primary-focus">
                         Sign In
                       </span>

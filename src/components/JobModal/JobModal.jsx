@@ -59,7 +59,7 @@ const JobModal = ({
         <form onSubmit={onSubmit} className="space-y-6 overflow-y-auto pr-2 max-h-[60vh]">
           {/* Basic Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
                 <span className="label-text font-semibold text-base-content">Job Title *</span>
               </label>
@@ -73,7 +73,7 @@ const JobModal = ({
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
                 <span className="label-text font-semibold text-base-content">Job Type *</span>
               </label>
@@ -93,7 +93,7 @@ const JobModal = ({
             </div>
           </div>
 
-          <div className="form-control">
+          <div className="form-control flex flex-col">
             <label className="label">
               <span className="label-text font-semibold text-base-content">Job Description *</span>
             </label>
@@ -109,7 +109,7 @@ const JobModal = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
                 <span className="label-text font-semibold text-base-content">Location *</span>
               </label>
@@ -123,7 +123,7 @@ const JobModal = ({
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
                 <span className="label-text font-semibold text-base-content">Shift Time *</span>
               </label>
@@ -141,7 +141,7 @@ const JobModal = ({
 
           {/* Salary Range */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
                 <span className="label-text font-semibold text-base-content">Minimum Salary (BDT) *</span>
               </label>
@@ -157,7 +157,7 @@ const JobModal = ({
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Maximum Salary (BDT) *</span>
+                <span className="label-text font-semibold text-base-content">Maximum Salary (In) *</span>
               </label>
               <input
                 type="number"
@@ -176,7 +176,7 @@ const JobModal = ({
             <label className="label">
               <span className="label-text font-semibold text-base-content">Job Highlights</span>
             </label>
-            <div className="space-y-2">
+            <div className="space-y-2 space-x-2">
               {formData.jobHighlights.map((highlight, index) => (
                 <input
                   key={index}
@@ -237,7 +237,7 @@ const JobModal = ({
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
                 <span className="label-text font-semibold text-base-content">Education *</span>
               </label>

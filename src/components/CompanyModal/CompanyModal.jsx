@@ -1,32 +1,34 @@
-import React from 'react';
-import { Building2 } from 'lucide-react';
+import React from "react";
+import { Building2 } from "lucide-react";
+import useAuth from "../../hooks/useAuth";
 
-const CompanyModal = ({ 
-  showModal, 
-  setShowModal, 
-  editingId, 
-  formData, 
-  setFormData, 
-  onSubmit, 
-  setEditingId 
+const CompanyModal = ({
+  showModal,
+  setShowModal,
+  editingId,
+  formData,
+  setFormData,
+  onSubmit,
+  setEditingId,
 }) => {
+  const { user } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleOverviewChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       companyOverview: {
         ...prev.companyOverview,
-        [name]: name === 'foundedYear' ? parseInt(value) : value
-      }
+        [name]: name === "foundedYear" ? parseInt(value) : value,
+      },
     }));
   };
 
@@ -35,8 +37,18 @@ const CompanyModal = ({
     setEditingId(null);
   };
 
+  // Set user email as default value when modal opens for creating new company
+  React.useEffect(() => {
+    if (showModal && !editingId && user?.email) {
+      setFormData((prev) => ({
+        ...prev,
+        email: user.email
+      }));
+    }
+  }, [showModal, editingId, user]);
+
   return (
-    <div className={`modal ${showModal ? 'modal-open' : ''}`}>
+    <div className={`modal ${showModal ? "modal-open" : ""}`}>
       <div className="modal-box w-full max-w-4xl bg-base-100 border border-base-300 shadow-2xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-3 bg-primary rounded-2xl">
@@ -44,18 +56,25 @@ const CompanyModal = ({
           </div>
           <div>
             <h3 className="font-bold text-2xl text-base-content">
-              {editingId ? 'Edit Company' : 'Create New Company'}
+              {editingId ? "Edit Company" : "Create New Company"}
             </h3>
-            <p className="text-base-content/60 text-sm">Fill in the company details below</p>
+            <p className="text-base-content/60 text-sm">
+              Fill in the company details below
+            </p>
           </div>
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-6 max-h-96 overflow-y-auto pr-2">
+        <form
+          onSubmit={onSubmit}
+          className="space-y-6 max-h-96 overflow-y-auto pr-2"
+        >
           {/* Basic Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Company Name *</span>
+                <span className="label-text font-semibold text-base-content">
+                  Company Name *
+                </span>
               </label>
               <input
                 type="text"
@@ -69,7 +88,9 @@ const CompanyModal = ({
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Email Address *</span>
+                <span className="label-text font-semibold text-base-content">
+                  Email Address *
+                </span>
               </label>
               <input
                 type="email"
@@ -77,30 +98,40 @@ const CompanyModal = ({
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="company@example.com"
-                className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
+                className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20 bg-base-200 cursor-not-allowed"
                 required
+                disabled
+                title="Email cannot be changed"
               />
+              <label className="label">
+                <span className="label-text-alt text-base-content/50">
+                  Your account email (cannot be changed)
+                </span>
+              </label>
             </div>
           </div>
 
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-semibold text-base-content">Description</span>
-            </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              placeholder="Brief description about your company..."
-              className="textarea textarea-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
-              rows="3"
-            ></textarea>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Address</span>
+                <span className="label-text font-semibold text-base-content">
+                  Description
+                </span>
+              </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="Brief description about your company..."
+                className="textarea textarea-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
+                rows="3"
+              ></textarea>
+            </div>
+            <div className="form-control flex flex-col">
+              <label className="label">
+                <span className="label-text font-semibold text-base-content">
+                  Address
+                </span>
               </label>
               <input
                 type="text"
@@ -111,9 +142,13 @@ const CompanyModal = ({
                 className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </div>
-            <div className="form-control">
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="form-control flex flex-col">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Phone</span>
+                <span className="label-text font-semibold text-base-content">
+                  Phone
+                </span>
               </label>
               <input
                 type="tel"
@@ -124,20 +159,21 @@ const CompanyModal = ({
                 className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </div>
-          </div>
-
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-semibold text-base-content">Website</span>
-            </label>
-            <input
-              type="url"
-              name="website"
-              value={formData.website}
-              onChange={handleInputChange}
-              placeholder="https://example.com"
-              className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
-            />
+            <div className="form-control flex flex-col">
+              <label className="label">
+                <span className="label-text font-semibold text-base-content">
+                  Website
+                </span>
+              </label>
+              <input
+                type="url"
+                name="website"
+                value={formData.website}
+                onChange={handleInputChange}
+                placeholder="https://example.com"
+                className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
           </div>
 
           {/* Company Overview Section */}
@@ -146,7 +182,9 @@ const CompanyModal = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Company Size</span>
+                <span className="label-text font-semibold text-base-content">
+                  Company Size
+                </span>
               </label>
               <input
                 type="text"
@@ -159,7 +197,9 @@ const CompanyModal = ({
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Company Type</span>
+                <span className="label-text font-semibold text-base-content">
+                  Company Type
+                </span>
               </label>
               <input
                 type="text"
@@ -173,9 +213,11 @@ const CompanyModal = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Sector</span>
+                <span className="label-text font-semibold text-base-content">
+                  Sector
+                </span>
               </label>
               <input
                 type="text"
@@ -186,9 +228,11 @@ const CompanyModal = ({
                 className="input input-bordered focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </div>
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Industry</span>
+                <span className="label-text font-semibold text-base-content">
+                  Industry
+                </span>
               </label>
               <input
                 type="text"
@@ -204,7 +248,9 @@ const CompanyModal = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Founded Year</span>
+                <span className="label-text font-semibold text-base-content">
+                  Founded Year
+                </span>
               </label>
               <input
                 type="number"
@@ -216,7 +262,9 @@ const CompanyModal = ({
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-semibold text-base-content">Annual Revenue</span>
+                <span className="label-text font-semibold text-base-content">
+                  Annual Revenue
+                </span>
               </label>
               <input
                 type="text"
@@ -238,11 +286,8 @@ const CompanyModal = ({
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="btn btn-primary gap-2"
-            >
-              {editingId ? 'Update Company' : 'Create Company'}
+            <button type="submit" className="btn btn-primary gap-2">
+              {editingId ? "Update Company" : "Create Company"}
             </button>
           </div>
         </form>

@@ -1,5 +1,12 @@
-import React from 'react';
-import { MapPin, Calendar, Clock, DollarSign, Users, BookOpen } from 'lucide-react';
+import React from "react";
+import {
+  MapPin,
+  Calendar,
+  Clock,
+  DollarSign,
+  Users,
+  BookOpen,
+} from "lucide-react";
 
 const JobCard = ({ job, onEdit, onDelete }) => {
   return (
@@ -10,7 +17,9 @@ const JobCard = ({ job, onEdit, onDelete }) => {
           <div className="flex items-center gap-3">
             <div className="avatar placeholder">
               <div className="bg-primary text-primary-content rounded-full w-12">
-                <span className="text-lg font-bold">{job.jobTitle.charAt(0)}</span>
+                <span className="text-lg font-bold">
+                  {job.jobTitle.charAt(0)}
+                </span>
               </div>
             </div>
             <div>
@@ -23,12 +32,14 @@ const JobCard = ({ job, onEdit, onDelete }) => {
           </div>
         </div>
 
-        <p className="text-base-content/70 mb-6 line-clamp-2">{job.jobDescription}</p>
+        <p className="text-base-content/70  line-clamp-2">
+          {job.jobDescription}
+        </p>
 
         <div className="divider my-2"></div>
 
         {/* Job Details */}
-        <div className="space-y-3 mb-6">
+        <div className="space-y-3 mb-2">
           <div className="flex items-center gap-3 text-base-content/80">
             <MapPin size={18} className="text-primary flex-shrink-0" />
             <span className="text-sm">{job.jobLocation}</span>
@@ -39,11 +50,16 @@ const JobCard = ({ job, onEdit, onDelete }) => {
           </div>
           <div className="flex items-center gap-3 text-base-content/80">
             <DollarSign size={18} className="text-primary flex-shrink-0" />
-            <span className="text-sm">৳{job.jobMinSalary.toLocaleString()} - ৳{job.jobMaxSalary.toLocaleString()}</span>
+            <span className="text-sm">
+              ৳{job.jobMinSalary.toLocaleString()} - ৳
+              {job.jobMaxSalary.toLocaleString()}
+            </span>
           </div>
           <div className="flex items-center gap-3 text-base-content/80">
             <Calendar size={18} className="text-primary flex-shrink-0" />
-            <span className="text-sm">Apply by: {new Date(job.applicationDeadline).toLocaleDateString()}</span>
+            <span className="text-sm">
+              Apply by: {new Date(job.applicationDeadline).toLocaleDateString()}
+            </span>
           </div>
         </div>
 
@@ -59,7 +75,9 @@ const JobCard = ({ job, onEdit, onDelete }) => {
             {job.jobHighlights.map((highlight, index) => (
               <div key={index} className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm text-base-content/70">{highlight}</span>
+                <span className="text-sm text-base-content/70">
+                  {highlight}
+                </span>
               </div>
             ))}
           </div>
@@ -83,7 +101,7 @@ const JobCard = ({ job, onEdit, onDelete }) => {
         {/* Action Buttons */}
         <div className="card-actions justify-end gap-2">
           <button
-            onClick={() => onDelete(job.id)}
+            onClick={() => onDelete(job.jobId)}
             className="btn btn-sm btn-error btn-outline"
           >
             Delete

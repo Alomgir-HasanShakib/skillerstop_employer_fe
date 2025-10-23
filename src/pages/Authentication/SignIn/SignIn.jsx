@@ -24,11 +24,13 @@ export default function SignIn() {
     try {
       const response = await loginUser(formData);
       const { accessToken, user } = response.data;
+      console.log(user, accessToken);
       //Save token
       localStorage.setItem("accessToken", accessToken);
-      // Update React Query
+      localStorage.setItem("user", JSON.stringify(user))
       login(user, accessToken);
-      console.log(user, accessToken);
+
+      
       toast.success("Login successful! Welcome to SkillersTop!");
       navigate("/company");
     } catch (error) {
@@ -137,7 +139,7 @@ export default function SignIn() {
                       <input
                         type="email"
                         placeholder="company@example.com"
-                        className="input input-bordered w-full pl-10 lg:pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
+                        className="input input-bordered w-full pl-5 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -155,7 +157,7 @@ export default function SignIn() {
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
-                        className="input input-bordered w-full pl-10 lg:pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
+                        className="input input-bordered w-full pl-5 pr-10 lg:pr-12 h-11 lg:h-12 text-sm lg:text-base focus:border-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -206,7 +208,7 @@ export default function SignIn() {
                     >
                       Don't have an employer account?{" "}
                       <span className="font-semibold text-primary hover:text-primary-focus">
-                        Create Company Account
+                        Create  Account
                       </span>
                     </Link>
                   </div>

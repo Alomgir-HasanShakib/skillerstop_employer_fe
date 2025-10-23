@@ -31,6 +31,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
