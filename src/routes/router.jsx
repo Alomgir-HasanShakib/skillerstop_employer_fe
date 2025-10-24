@@ -2,59 +2,74 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
-import Home from "../pages/Home/Home";
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import SignUp from "../pages/Authentication/SignUp/SignUp";
-import ProfileForm from "../components/ProfileForm/ProfileFrom";
 import MyProfile from "../components/MyProfile/MyProfile";
-import JobDetails from "../pages/JobDetails/JobDetails";
 import VerifyEmailPage from "../pages/Authentication/EmailVerify/EmailVerify";
-import PostJobs from "../components/PostJobs/PostJobs";
+import PostJobs from "../pages/PostJobs/PostJobs";
+import Company from "../pages/Company/Company";
+import PrivateRoute from "./private/PrivateRoute";
+import PublicRoute from "./public/PublicRoute";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
     children: [
       {
-        index: true,
-        element: <Home></Home>,
-      },
-      {
-        path: "about",
-        element: <About></About>,
-      },
-      {
-        path: "contact",
-        element: <Contact></Contact>,
+        path: "/",
+        element: (
+          <PublicRoute>
+            <SignIn />
+          </PublicRoute>
+        ),
       },
       {
         path: "signin",
-        element: <SignIn></SignIn>,
+        element: (
+          <PublicRoute>
+            <SignIn />
+          </PublicRoute>
+        ),
       },
       {
         path: "signup",
-        element: <SignUp></SignUp>,
+        element: (
+          <PublicRoute>
+            <SignUp />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: "company",
+        element: (
+          <PrivateRoute>
+            <Company />
+          </PrivateRoute>
+        ),
       },
       {
         path: "profile",
-        element: <MyProfile></MyProfile>,
-      },
-      {
-        path: "update-profile",
-        element: <ProfileForm></ProfileForm>,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "postJobs",
-        element: <PostJobs></PostJobs>,
+        element: (
+          <PrivateRoute>
+            <PostJobs />
+          </PrivateRoute>
+        ),
       },
-      {
-        path: "jobDetails",
-        element: <JobDetails></JobDetails>,
-      },
-      {
-        path: "verify-email",
-        element: <VerifyEmailPage></VerifyEmailPage>,
-      },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
+      { path: "verify-email", element: <PrivateRoute>
+        <VerifyEmailPage /> 
+      </PrivateRoute>},
     ],
   },
 ]);

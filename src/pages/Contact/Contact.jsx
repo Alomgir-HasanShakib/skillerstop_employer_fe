@@ -38,7 +38,7 @@ export default function Contact() {
     e.preventDefault();
     console.log("Form submitted:", formData);
     alert(
-      "Thank you for contacting SkillersTop! Our team will reach out to you within 24 hours."
+      "Thank you for contacting SkillersTop! Our employer support team will reach out to you within 24 hours."
     );
     setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
@@ -46,20 +46,20 @@ export default function Contact() {
   const contactReasons = [
     {
       icon: Building2,
-      title: "For Employers",
-      description: "Post jobs and find talented candidates",
+      title: "Company Registration",
+      description: "Set up and verify your company profile",
       gradient: "from-primary to-primary-focus",
     },
     {
-      icon: Search,
-      title: "For Job Seekers",
-      description: "Get help finding your dream job",
+      icon: Briefcase,
+      title: "Job Posting Support",
+      description: "Get help with posting and managing jobs",
       gradient: "from-secondary to-secondary-focus",
     },
     {
-      icon: HelpCircle,
-      title: "General Support",
-      description: "Questions about our platform",
+      icon: Users,
+      title: "Talent Access",
+      description: "Find and connect with skilled candidates",
       gradient: "from-accent to-accent-focus",
     },
   ];
@@ -67,21 +67,21 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email Support",
-      info: "support@skillerstop.com",
-      subInfo: "We reply within 24 hours",
+      title: "Employer Support",
+      info: "employers@skillerstop.com",
+      subInfo: "Dedicated employer assistance",
       color: "text-primary",
     },
     {
       icon: Phone,
-      title: "Phone",
+      title: "Sales Team",
       info: "+1 (555) 123-4567",
       subInfo: "Mon-Fri 9AM to 6PM EST",
       color: "text-success",
     },
     {
       icon: MapPin,
-      title: "Office",
+      title: "Head Office",
       info: "San Francisco, CA",
       subInfo: "United States",
       color: "text-info",
@@ -96,25 +96,24 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-base-100">
-      <div className="container mx-auto px-4 py-30">
+    <div className="min-h-screen bg-base-100 py-10">
+      <div className="container mx-auto px-4 ">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary text-primary-content px-6 py-3 rounded-full mb-6 shadow-lg">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-6 py-3 rounded-full mb-6 ">
             <MessageCircle className="w-5 h-5" />
-            <span className="font-bold text-sm">We're Here to Help</span>
+            <span className="font-bold text-sm">Employer Support</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-black text-base-content mb-6">
-            Get in{" "}
+            Employer{" "}
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Touch
+              Support
             </span>
           </h1>
 
           <p className="text-xl text-base-content/70 max-w-2xl mx-auto">
-            Whether you're hiring talent or searching for opportunities, we're
-            ready to assist you
+            Dedicated assistance for companies to hire top talent and manage recruitment efficiently
           </p>
         </div>
 
@@ -149,10 +148,10 @@ export default function Contact() {
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-base-content">
-                    Send us a Message
+                    Contact Employer Support
                   </h2>
                   <p className="text-base-content/70 text-sm">
-                    Fill out the details and we'll get back to you soon
+                    Get dedicated assistance for your hiring needs
                   </p>
                 </div>
               </div>
@@ -161,7 +160,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Full Name *
+                      Company Representative *
                     </label>
                     <input
                       type="text"
@@ -175,7 +174,7 @@ export default function Contact() {
 
                   <div>
                     <label className="block text-sm font-semibold text-base-content mb-2">
-                      Phone Number
+                      Company Phone
                     </label>
                     <input
                       type="tel"
@@ -190,12 +189,12 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-semibold text-base-content mb-2">
-                    Email Address *
+                    Work Email Address *
                   </label>
                   <input
                     type="email"
                     name="email"
-                    placeholder="john@example.com"
+                    placeholder="hr@yourcompany.com"
                     className="w-full px-4 py-3 bg-base-200 border border-base-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     value={formData.email}
                     onChange={handleChange}
@@ -204,7 +203,7 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-semibold text-base-content mb-2">
-                    Subject *
+                    Inquiry Type *
                   </label>
                   <select
                     name="subject"
@@ -212,18 +211,14 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                   >
-                    <option value="">Select a topic</option>
-                    <option value="employer">
-                      I'm an Employer - Need Help
-                    </option>
-                    <option value="jobseeker">
-                      I'm a Job Seeker - Need Help
-                    </option>
+                    <option value="">Select inquiry type</option>
+                    <option value="company-setup">Company Profile Setup</option>
+                    <option value="job-posting">Job Posting Assistance</option>
+                    <option value="premium-plan">Premium Plan Inquiry</option>
+                    <option value="candidate-access">Candidate Database Access</option>
+                    <option value="billing">Billing & Subscription</option>
                     <option value="technical">Technical Support</option>
-                    <option value="billing">Billing & Payments</option>
-                    <option value="partnership">
-                      Partnership Opportunities
-                    </option>
+                    <option value="partnership">Partnership Opportunities</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
@@ -234,7 +229,7 @@ export default function Contact() {
                   </label>
                   <textarea
                     name="message"
-                    placeholder="Tell us how we can help you..."
+                    placeholder="Tell us about your hiring needs and how we can assist you..."
                     rows="6"
                     className="w-full px-4 py-3 bg-base-200 border border-base-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                     value={formData.message}
@@ -247,7 +242,7 @@ export default function Contact() {
                   className="w-full bg-primary  text-primary-content font-bold py-4 px-8 rounded-xl  transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Send className="w-5 h-5" />
-                  Send Message
+                  Contact Employer Support
                 </button>
               </div>
             </div>
@@ -305,7 +300,7 @@ export default function Contact() {
             {/* Social Media */}
             <div className="bg-base-100 rounded-2xl p-6  border border-base-content/8">
               <h3 className="font-bold text-base-content mb-4">
-                Connect With Us
+                Follow for Updates
               </h3>
               <div className="flex gap-3">
                 {socialLinks.map((social, idx) => (
@@ -324,20 +319,19 @@ export default function Contact() {
 
         {/* Bottom CTA */}
         <div className="bg-base-100 rounded-3xl p-10 text-center  border border-base-content/8 ">
-          <Users className="w-16 h-16 mx-auto mb-4 opacity-90" />
+          <Building2 className="w-16 h-16 mx-auto mb-4 opacity-90" />
           <h2 className="text-3xl font-bold mb-3">
-            Join SkillersTop Community
+            Start Hiring Top Talent Today
           </h2>
           <p className="text-lg opacity-90 mb-6 max-w-2xl mx-auto">
-            Connect with thousands of employers and job seekers. Start your
-            journey today!
+            Join thousands of successful companies who found their perfect candidates through SkillersTop
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className=" btn-primary btn hover:bg-transparent hover:text-primary  font-bold py-3 px-8 rounded-xl   transition-all duration-300">
-              Post a Job
+              Create Company Profile
             </button>
             <button className="bg-transparent btn hover:bg-primary hover:text-base-content border-2 border-primary  font-bold py-3 px-8 rounded-xl text-primary transition-all duration-300">
-              Find Jobs
+              View Pricing Plans
             </button>
           </div>
         </div>

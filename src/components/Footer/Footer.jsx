@@ -10,6 +10,9 @@ import {
   Linkedin,
   Instagram,
   Youtube,
+  Building2,
+  Users,
+  Target,
 } from "lucide-react";
 import { Link } from "react-router";
 import NavLightLogo from "../../assets/brand.svg";
@@ -63,9 +66,9 @@ export default function Footer() {
             {/* Brand Section */}
             <div className="space-y-6">
               <div className="flex items-center gap-2">
-                <Link
-                  to="/"
-                  className="flex items-center group transition-transform hover:scale-105 duration-300"
+                <div
+                 
+                  className="flex items-center group transition-transform  duration-300"
                 >
                   <div>
                     <img
@@ -75,15 +78,14 @@ export default function Footer() {
                           ? NavDarkLogo
                           : NavLightLogo
                       }
-                      className="w-30"
+                      className="w-23"
                       alt="Logo"
                     />
                   </div>
-                </Link>
+                </div>
               </div>
               <p className="text-sm leading-relaxed opacity-80">
-                Connecting talented professionals with their dream careers. Your
-                success is our mission.
+                Your trusted partner in talent acquisition. Connecting companies with exceptional candidates to drive business success.
               </p>
               <div className="flex gap-3">
                 <a
@@ -119,60 +121,10 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* For Job Seekers */}
-            <div>
-              <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-primary" />
-                For Job Seekers
-              </h4>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href="#"
-                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
-                  >
-                    Browse Jobs
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
-                  >
-                    Job Categories
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
-                  >
-                    Career Advice
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
-                  >
-                    Resume Builder
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
-                  >
-                    Salary Guide
-                  </a>
-                </li>
-              </ul>
-            </div>
-
             {/* For Employers */}
             <div>
               <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-primary" />
+                <Building2 className="w-5 h-5 text-primary" />
                 For Employers
               </h4>
               <ul className="space-y-3">
@@ -197,6 +149,14 @@ export default function Footer() {
                     href="#"
                     className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
                   >
+                    Company Profile
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
+                  >
                     Pricing Plans
                   </a>
                 </li>
@@ -205,7 +165,49 @@ export default function Footer() {
                     href="#"
                     className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
                   >
-                    Recruitment Solutions
+                    Employer Dashboard
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Recruitment Solutions */}
+            <div>
+              <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
+                <Target className="w-5 h-5 text-primary" />
+                Solutions
+              </h4>
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href="#"
+                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
+                  >
+                    AI Candidate Matching
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
+                  >
+                    Bulk Hiring
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
+                  >
+                    Skill Assessments
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="link link-hover text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block"
+                  >
+                    Recruitment Analytics
                   </a>
                 </li>
                 <li>
@@ -223,19 +225,19 @@ export default function Footer() {
             <div>
               <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
                 <Mail className="w-5 h-5 text-primary" />
-                Get In Touch
+                Employer Support
               </h4>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 group">
                   <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300" />
                   <span className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                    123 Career Street, San Francisco, CA 94102
+                    123 Business District, San Francisco, CA 94102
                   </span>
                 </li>
                 <li className="flex items-center gap-3 group">
                   <Mail className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                   <span className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                    support@skillerstop.com
+                    employers@skillerstop.com
                   </span>
                 </li>
                 <li className="flex items-center gap-3 group">
@@ -247,7 +249,7 @@ export default function Footer() {
               </ul>
               <div className="mt-6">
                 <button className="btn btn-primary btn-sm w-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  Contact Us
+                  Contact Sales
                 </button>
               </div>
             </div>
@@ -261,16 +263,16 @@ export default function Footer() {
               <div className="text-center md:text-left">
                 <h4 className="font-bold text-xl mb-2 flex items-center justify-center md:justify-start gap-2">
                   <Mail className="w-6 h-6 text-primary" />
-                  Subscribe to Our Newsletter
+                  Employer Insights
                 </h4>
                 <p className="text-sm opacity-70">
-                  Get weekly job alerts and career tips delivered to your inbox
+                  Get hiring trends, recruitment tips, and industry insights delivered to your inbox
                 </p>
               </div>
               <div className="flex gap-2 w-full md:w-auto">
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter work email"
                   className="input input-bordered w-full md:w-72 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                 />
                 <button className="btn btn-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -311,7 +313,7 @@ export default function Footer() {
                   href="#"
                   className="link link-hover opacity-70 hover:opacity-100 hover:text-primary transition-all duration-300"
                 >
-                  Accessibility
+                  Service Agreement
                 </a>
               </div>
             </div>
