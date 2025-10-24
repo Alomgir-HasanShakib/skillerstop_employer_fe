@@ -50,8 +50,8 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen  py-10 px-4">
-      <div className="container mx-auto">
+    <div className="min-h-screen  py-10 ">
+      <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 bg-primary/10 text-primary px-6 py-3 rounded-full mb-6">

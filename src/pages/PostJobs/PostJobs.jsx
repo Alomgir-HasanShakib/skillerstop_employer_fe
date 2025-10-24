@@ -15,6 +15,8 @@ export default function Job() {
   const [editingId, setEditingId] = useState(null);
   const [companyId, setCompanyId] = useState(null);
   const [loadingCompany, setLoadingCompany] = useState(true);
+  const [loadingJobs, setLoadingJobs] = useState(true);
+
 
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -73,18 +75,21 @@ export default function Job() {
   }, [user]);
 
   // Fetch all jobs
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const data = await getAllJobs();
-        setJobs(data);
-      } catch (error) {
-        console.error("Job Fetch Error:", error.response?.data || error);
-        toast.error("Failed to load jobs");
-      }
-    };
-    fetchJobs();
-  }, []);
+useEffect(() => {
+  const fetchJobs = async () => {
+    setLoadingJobs(true);
+    try {
+      const data = await getAllJobs();
+      setJobs(data);
+    } catch (error) {
+      console.error("Job Fetch Error:", error.response?.data || error);
+      toast.error("Failed to load jobs");
+    } finally {
+      setLoadingJobs(false);
+    }
+  };
+  fetchJobs();
+}, []);
 
   //  Create or Update Job
   const handleSubmit = async (e) => {

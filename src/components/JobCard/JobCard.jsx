@@ -37,51 +37,52 @@ const JobCard = ({ job, onEdit, onDelete }) => {
         </p>
 
         <div className="divider my-2"></div>
-
-        {/* Job Details */}
-        <div className="space-y-3 mb-2">
-          <div className="flex items-center gap-3 text-base-content/80">
-            <MapPin size={18} className="text-primary flex-shrink-0" />
-            <span className="text-sm">{job.jobLocation}</span>
+        <div className="flex justify-between items-center ">
+          {/* Job Details */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 text-base-content/80">
+              <MapPin size={18} className="text-primary flex-shrink-0" />
+              <span className="text-sm">{job.jobLocation}</span>
+            </div>
+            <div className="flex items-center gap-3 text-base-content/80">
+              <Clock size={18} className="text-primary flex-shrink-0" />
+              <span className="text-sm">{job.jobShiftTime}</span>
+            </div>
+            <div className="flex items-center gap-3 text-base-content/80">
+              <DollarSign size={18} className="text-primary flex-shrink-0" />
+              <span className="text-sm">
+                ৳{job.jobMinSalary.toLocaleString()} - ৳
+                {job.jobMaxSalary.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex items-center gap-3 text-base-content/80">
+              <Calendar size={18} className="text-primary flex-shrink-0" />
+              <span className="text-sm">
+                Apply by:{" "}
+                {new Date(job.applicationDeadline).toLocaleDateString()}
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-base-content/80">
-            <Clock size={18} className="text-primary flex-shrink-0" />
-            <span className="text-sm">{job.jobShiftTime}</span>
-          </div>
-          <div className="flex items-center gap-3 text-base-content/80">
-            <DollarSign size={18} className="text-primary flex-shrink-0" />
-            <span className="text-sm">
-              ৳{job.jobMinSalary.toLocaleString()} - ৳
-              {job.jobMaxSalary.toLocaleString()}
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-base-content/80">
-            <Calendar size={18} className="text-primary flex-shrink-0" />
-            <span className="text-sm">
-              Apply by: {new Date(job.applicationDeadline).toLocaleDateString()}
-            </span>
+          {/* Job Highlights */}
+          <div>
+            <h4 className="font-semibold text-base-content mb-3 flex items-center gap-2">
+              <Users size={16} />
+              Job Highlights
+            </h4>
+            <div className="space-y-2">
+              {job.jobHighlights.map((highlight, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-sm text-base-content/70">
+                    {highlight}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="divider my-2"></div>
-
-        {/* Job Highlights */}
-        <div className="mb-6">
-          <h4 className="font-semibold text-base-content mb-3 flex items-center gap-2">
-            <Users size={16} />
-            Job Highlights
-          </h4>
-          <div className="space-y-2">
-            {job.jobHighlights.map((highlight, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm text-base-content/70">
-                  {highlight}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Skills */}
         <div className="mb-6">
