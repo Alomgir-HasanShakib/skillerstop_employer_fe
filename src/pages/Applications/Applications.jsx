@@ -155,7 +155,7 @@ export default function Applicants({ currentUser }) {
 
       {/* Empty State */}
       {jobWiseApplicants.length === 0 ? (
-        <div className="card bg-base-200 shadow-xl">
+        <div className="card bg-base-200 border border-base-content/10">
           <div className="card-body items-center text-center py-16">
             <div className="text-6xl mb-4">📭</div>
             <h2 className="card-title text-2xl mb-2">No Applicants Yet</h2>
