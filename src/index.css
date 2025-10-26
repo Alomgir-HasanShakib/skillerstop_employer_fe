@@ -17,3 +17,6 @@
     --color-secondary: #FFD6A7;
   }
 
+  *{
+    scroll-behavior: smooth;
+  }

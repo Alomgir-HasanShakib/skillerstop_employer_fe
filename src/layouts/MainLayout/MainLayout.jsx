@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Loading from "../../components/Loading/Loading";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 export default function MainLayout() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false),);
+    const timer = setTimeout(() => setLoading(false),1000);
     return () => clearTimeout(timer);
   }, []);
   if (loading) {
@@ -19,10 +20,13 @@ export default function MainLayout() {
   }
   return (
     <div>
+      <ScrollToTop></ScrollToTop>
       <div className="sticky top-0 z-50">
          <Navbar></Navbar>
       </div>
-      <Outlet></Outlet>
+     <Suspense fallback={<Loading />}>
+         <Outlet></Outlet>
+      </Suspense>
       <Footer></Footer>
     </div>
   );

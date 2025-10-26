@@ -4,12 +4,13 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import SignUp from "../pages/Authentication/SignUp/SignUp";
-import MyProfile from "../components/MyProfile/MyProfile";
+import MyProfile from "../pages/MyProfile/MyProfile";
 import VerifyEmailPage from "../pages/Authentication/EmailVerify/EmailVerify";
 import PostJobs from "../pages/PostJobs/PostJobs";
 import Company from "../pages/Company/Company";
 import PrivateRoute from "./private/PrivateRoute";
 import PublicRoute from "./public/PublicRoute";
+import Applications from "../pages/Applications/Applications";
 
 
 export const router = createBrowserRouter([
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       { path: "verify-email", element: <PrivateRoute>
         <VerifyEmailPage /> 
       </PrivateRoute>},
+      {
+        path: "applications",
+        element: <PrivateRoute><Applications></Applications></PrivateRoute>
+      }
     ],
   },
 ]);
