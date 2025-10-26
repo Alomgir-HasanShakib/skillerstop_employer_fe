@@ -13,7 +13,7 @@ const CompanyCard = ({ company, onEdit, onDelete }) => {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto  py-8">
         {/* Main Card */}
         <div className="card bg-base-100 border border-base-content/10 ">
           {/* Header Section with Gradient */}

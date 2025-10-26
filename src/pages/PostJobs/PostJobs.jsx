@@ -7,6 +7,7 @@ import { getAllJobs, createJob, updateJob, deleteJob } from "../../api/job/job";
 import { getAllCompanies } from "../../api/company/company";
 import { toast } from "sonner";
 import useAuth from "../../hooks/useAuth";
+import Loading from "../../components/Loading/Loading";
 
 export default function Job() {
   const { user } = useAuth();
@@ -16,7 +17,6 @@ export default function Job() {
   const [companyId, setCompanyId] = useState(null);
   const [loadingCompany, setLoadingCompany] = useState(true);
   const [loadingJobs, setLoadingJobs] = useState(true);
-
 
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -54,19 +54,16 @@ export default function Job() {
             c.createdBy === user._id ||
             c.employers?.some((emp) => emp.createdBy === user._id)
         );
-
         if (!myCompany) {
           toast.error("You have no company! Please create a company first.");
           setCompanyId(null);
           setLoadingCompany(false);
           return;
         }
-
         setCompanyId(myCompany._id);
         setLoadingCompany(false);
       } catch (error) {
         console.error("Company fetch error:", error);
-        toast.error("Failed to fetch company info");
         setLoadingCompany(false);
       }
     };
@@ -75,21 +72,21 @@ export default function Job() {
   }, [user]);
 
   // Fetch all jobs
-useEffect(() => {
-  const fetchJobs = async () => {
-    setLoadingJobs(true);
-    try {
-      const data = await getAllJobs();
-      setJobs(data);
-    } catch (error) {
-      console.error("Job Fetch Error:", error.response?.data || error);
-      toast.error("Failed to load jobs");
-    } finally {
-      setLoadingJobs(false);
-    }
-  };
-  fetchJobs();
-}, []);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setLoadingJobs(true);
+      try {
+        const data = await getAllJobs();
+        setJobs(data);
+      } catch (error) {
+        console.error("Job Fetch Error:", error.response?.data || error);
+        toast.error("Failed to load jobs");
+      } finally {
+        setLoadingJobs(false);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   //  Create or Update Job
   const handleSubmit = async (e) => {
@@ -209,7 +206,8 @@ useEffect(() => {
             Manage Your <span className="text-primary">Job Posts</span>
           </h1>
           <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
-            Create and manage job postings to attract top talent and grow your team
+            Create and manage job postings to attract top talent and grow your
+            team
           </p>
         </div>
 
@@ -234,17 +232,30 @@ useEffect(() => {
             {loadingCompany ? "Loading..." : "Post New Job"}
           </button>
         </div>
-
+        {/* Loading State */}
+        {loadingJobs && (
+          <div className="flex justify-center items-center pb-12">
+            <Loading></Loading>
+          </div>
+        )}
         {/* Jobs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {jobs.map((job) => (
-            <JobCard
-              key={job._id}
-              job={job}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ))}
+          {loadingJobs
+            ? // Loading Placeholder
+              Array.from({ length: 6 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="h-96 bg-base-200 animate-pulse rounded-lg"
+                />
+              ))
+            : jobs.map((job) => (
+                <JobCard
+                  key={job._id}
+                  job={job}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              ))}
         </div>
       </div>
 

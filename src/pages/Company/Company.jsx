@@ -10,6 +10,7 @@ import CompanyModal from "../../components/CompanyModal/CompanyModal";
 import CompanyCard from "../../components/CompanyCard/CompanyCard";
 import { toast } from "sonner";
 import useAuth from "../../hooks/useAuth";
+import Loading from "../../components/Loading/Loading";
 
 export default function Company() {
   const [companies, setCompanies] = useState([]);
@@ -239,13 +240,12 @@ export default function Company() {
         {/* Loading State */}
         {loading && (
           <div className="flex justify-center items-center py-12">
-            <span className="loading loading-spinner loading-lg text-primary"></span>
-            <span className="ml-3 text-base-content">Loading companies...</span>
+            <Loading></Loading>
           </div>
         )}
 
-        {/* Companies List - Email match না হলে No Company Here দেখাবে */}
-        <div className="space-y-6">
+        {/* Companies List */}
+        <div className="space-y-6 ">
           {!loading && !hasMatchingCompany && (
             <div className="text-center py-12">
               <Building2 className="w-16 h-16 text-base-content/30 mx-auto mb-4" />
@@ -269,7 +269,7 @@ export default function Company() {
             </div>
           )}
 
-          {/* CompanyCard শুধুমাত্র matching email থাকলে দেখাবে */}
+         
           {hasMatchingCompany &&
             userCompanies.map((company) => (
               <CompanyCard

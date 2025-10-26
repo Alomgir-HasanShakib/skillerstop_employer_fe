@@ -31,7 +31,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -166,73 +165,79 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+         
+         <div className="flex lg:hidden gap-2 items-center justify-center ">
+           <div className=" lg:hidden ">
+                <ThemeToggle />
+              </div>
+           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden btn btn-ghost btn-square"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+         </div>
         </div>
 
         {/* Mobile Navigation */}
-        <div
-          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="space-y-2 pt-4">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={({ isActive }) =>
-                    `flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
-                      isActive
-                        ? "bg-primary text-primary-content shadow-lg"
-                        : "text-base-content hover:bg-base-200"
-                    }`
-                  }
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{link.label}</span>
-                </NavLink>
-              );
-            })}
-            <div className="flex items-center space-x-3 pt-4">
-              <div className="flex-1 flex justify-center">
-                <ThemeToggle />
-              </div>
-              {user ? (
-                <div className="flex-1 flex flex-col space-y-2">
-                  <Link
-                    to="/profile"
+        <div>
+          
+          <div
+            className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+              isOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="space-y-2 pt-4">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="btn btn-outline gap-2"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+                        isActive
+                          ? "bg-primary text-primary-content shadow-lg"
+                          : "text-base-content hover:bg-base-200"
+                      }`
+                    }
                   >
-                    <User className="w-5 h-5" />
-                    Profile
+                    <Icon className="w-5 h-5" />
+                    <span>{link.label}</span>
+                  </NavLink>
+                );
+              })}
+              <div className="flex items-center space-x-3 pt-4">
+                {user ? (
+                  <div className="flex-1 flex flex-col space-y-2">
+                    <Link
+                      to="/profile"
+                      onClick={() => setIsOpen(false)}
+                      className="btn btn-outline gap-2"
+                    >
+                      <User className="w-5 h-5" />
+                      Profile
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="btn btn-error gap-2"
+                    >
+                      <LogOut className="w-5 h-5" />
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    to="/signin"
+                    className="flex-1 btn btn-primary shadow-lg gap-2"
+                  >
+                    <LogIn className="w-5 h-5" />
+                    Login
                   </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="btn btn-error gap-2"
-                  >
-                    <LogOut className="w-5 h-5" />
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  to="/signin"
-                  className="flex-1 btn btn-primary shadow-lg gap-2"
-                >
-                  <LogIn className="w-5 h-5" />
-                  Login
-                </Link>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>

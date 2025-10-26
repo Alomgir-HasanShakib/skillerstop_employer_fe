@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { BiCube } from "react-icons/bi";
 import useAuth from "../../hooks/useAuth";
-import Loading from "../Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 
 export default function MyProfile() {
   const [loading,] = useState(false);
@@ -62,7 +62,7 @@ export default function MyProfile() {
               <div className="relative">
                 <div className="avatar placeholder">
                   <div className="bg-base-100 text-primary rounded-full w-36 h-36 ring-4 ring-white ring-offset-4 ring-offset-primary shadow-xl">
-                    <span className="text-6xl font-bold">
+                    <span className="text-6xl flex justify-center items-center w-full h-full font-bold">
                       {userData.name.charAt(0)}
                     </span>
                   </div>
@@ -111,9 +111,9 @@ export default function MyProfile() {
                     Post a Job
                   </button>
                 </Link>
-                <Link>
-                  <button
-                    onClick={handleMyApply}
+                <Link to="/applications">
+                    <button
+                    
                     className="btn  text-primary gap-2 btn-secondary transition-all duration-300  w-full md:w-auto border-0"
                   >
                     <FileText className="h-5 w-5" strokeWidth={2} />
